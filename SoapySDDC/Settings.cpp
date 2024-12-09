@@ -323,30 +323,40 @@ void SoapySDDC::setSampleRate(const int, const size_t, const double rate)
     DbgPrintf("SoapySDDC::setSampleRate %f\n", rate);
     switch ((int)rate)
     {
-    case 32000000:
-        sampleRate = 32000000;
-        samplerateidx = 4;
-        break;
-    case 16000000:
-        sampleRate = 16000000;
-        samplerateidx = 3;
-        break;
-    case 8000000:
-        sampleRate = 8000000;
-        samplerateidx = 2;
+    case 2000000:
+        sampleRate = 2000000;
+        samplerateidx = 0;
         break;
     case 4000000:
         sampleRate = 4000000;
         samplerateidx = 1;
         break;
-    case 2000000:
-        sampleRate = 2000000;
-        samplerateidx = 0;
+    case 8000000:
+        sampleRate = 8000000;
+        samplerateidx = 2;
+        break;
+    case 16000000:
+        sampleRate = 16000000;
+        samplerateidx = 3;
+        break;
+    case 32000000:
+        sampleRate = 32000000;
+        samplerateidx = 4;
+        break;
+    case 64000000:
+        sampleRate = 64000000;
+        samplerateidx = 5;
+        break;
+    case 128000000:
+        sampleRate = 128000000;
+        samplerateidx = 6;
         break;
     default:
+        DbgPrintf("Invalid sample rate\n");
         return;
     }
 }
+
 
 double SoapySDDC::getSampleRate(const int, const size_t) const
 {
@@ -359,14 +369,17 @@ std::vector<double> SoapySDDC::listSampleRates(const int, const size_t) const
     DbgPrintf("SoapySDDC::listSampleRates\n");
     std::vector<double> results;
 
-    results.push_back(2000000);
-    results.push_back(4000000);
-    results.push_back(8000000);
-    results.push_back(16000000);
-    results.push_back(32000000);
+    results.push_back(2000000);   // 2 MSPS
+    results.push_back(4000000);   // 4 MSPS
+    results.push_back(8000000);   // 8 MSPS
+    results.push_back(16000000);  // 16 MSPS
+    results.push_back(32000000);  // 32 MSPS
+    results.push_back(64000000);  // 64 MSPS
+    results.push_back(128000000); // 128 MSPS
 
     return results;
 }
+
 
 // void SoapySDDC::setMasterClockRate(const double rate)
 // {

@@ -335,26 +335,33 @@ int sddc_set_sample_rate(sddc_t *t, double sample_rate)
 {
     switch((int64_t)sample_rate)
     {
+        case 128000000:  // Add support for 128 MSPS
+            t->samplerateidx = 0; // Adjust the index if hardware requires a specific mapping
+            break;
+        case 64000000:   // Add support for 64 MSPS
+            t->samplerateidx = 1; // Adjust the index if hardware requires a specific mapping
+            break;
         case 32000000:
-            t->samplerateidx = 0;
-            break;
-        case 16000000:
-            t->samplerateidx = 1;
-            break;
-        case 8000000:
             t->samplerateidx = 2;
             break;
-        case 4000000:
+        case 16000000:
             t->samplerateidx = 3;
             break;
-        case 2000000:
+        case 8000000:
             t->samplerateidx = 4;
             break;
+        case 4000000:
+            t->samplerateidx = 5;
+            break;
+        case 2000000:
+            t->samplerateidx = 6;
+            break;
         default:
-            return -1;
+            return -1; // Unsupported sample rate
     }
     return 0;
 }
+
 
 int sddc_set_async_params(sddc_t *t, uint32_t frame_size, 
                           uint32_t num_frames, sddc_read_async_cb_t callback,
