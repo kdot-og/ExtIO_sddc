@@ -56,7 +56,7 @@
 
 enum rf_mode { NOMODE = 0, HFMODE = 0x1, VHFMODE = 0x2 }; 
 
-#define HF_HIGH (32000000)    // 32M
+#define HF_HIGH (64000000)    // 64M
 #define MW_HIGH ( 2000000)
 
 #define EXT_BLOCKLEN		512	* 64	/* 32768 only multiples of 512 */
@@ -77,11 +77,11 @@ extern bool saveADCsamplesflag;
 extern uint32_t  adcnominalfreq;
 
 // transferSize must be a multiple of 16 (maxBurst) * 1024 (SS packet size) = 16384
-const uint32_t transferSize = 131072;
+const uint32_t transferSize = 262144;
 const uint32_t transferSamples = transferSize / sizeof(int16_t);
 const uint32_t concurrentTransfers = 16;  // used to be 96, but I think it is too high
 
-const uint32_t DEFAULT_ADC_FREQ = 64000000;	// ADC sampling frequency
+const uint32_t DEFAULT_ADC_FREQ = 128000000;	// ADC sampling frequency
 
 const uint32_t DEFAULT_TRANSFERS_PER_SEC = DEFAULT_ADC_FREQ / transferSamples;
 
