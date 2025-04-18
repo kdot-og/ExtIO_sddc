@@ -9,6 +9,29 @@ The direct link to the current version v1.2.0 Version released at 18/3/2021 is: 
 
 *If you want to try the beta EXTIO driver which is for testing, you can find the binary for each change here: https://github.com/ik1xpv/ExtIO_sddc/actions. Select one specific code change you like to try, click on the link of the change. And you will find the binary on the bottom of the change.*
 
+## Installation Instructions for kdotOG version
+
+My changes make a contribution to windows and radioconda by allowing for GNU radio compatibility Via the SoapySDDC for the RX888 MK2 sdr.
+It mostly comes down to the compiling process I used with minor modifications to code.
+
+```bash
+git clone https://github.com/kdot-og/ExtIO_sddc.git
+cd ExtIO_sddc
+mkdir build
+cd build
+//change x64 to Win32 if using a 32bit radioconda install
+cmake .. -G "Visual Studio 17 2022" -A x64- -DCMAKE_BUILD_TYPE=Release .. 
+cmake --build . --config Release
+```
+
+I would recommend using this in conjunction with radioconda for simplicity.
+Once complied, copy the SDDCSupport.dll to the SoapySDR support files in radioconda.
+Usually under C:\ProgramData\radioconda\Library\lib\SoapySDR\modules0.8 if using the default directory.
+Also set C:\ProgramData\radioconda\Library\bin to system path and then type 
+SoapySDRUtil --info to check if SDDC is installed correctly.
+Finally, plug in the RX888 and type SoapySDRUtil --find to see if your rx888 is detected. 
+If you have your cypress FX3 driver installed right you should see driver=SDDC you can now use with soapy custom blocks in gnu radio or sdr programs like cubic sdr on windows!  
+
 
 ## Build Instructions for ExtIO
 
